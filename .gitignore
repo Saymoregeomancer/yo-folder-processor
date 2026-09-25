@@ -11,6 +11,7 @@
 !/install_context_menu.bat
 !/install_context_menu.ps1
 !/uninstall_context_menu.bat
+!/build_exe.bat
 
 # локальні дані — ніколи не комітити
 db.ini

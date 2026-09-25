@@ -9,7 +9,11 @@ if not "%~1"=="" echo  %~1
 echo ==========================================================
 echo.
 
-python process_folders.py --dry-run %*
+if exist "%~dp0process_folders.exe" (
+    "%~dp0process_folders.exe" --dry-run %*
+) else (
+    python process_folders.py --dry-run %*
+)
 
 echo.
 pause

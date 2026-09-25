@@ -36,7 +36,9 @@ EXCEL_EXTS = (".xlsx", ".xlsm", ".xls")
 HEADER_ROW = 1                 # рядок із назвами колонок
 DROP_COL_MARKER = "_r"         # колонки з цим маркером у заголовку видаляються
 
-DB_CONFIG_PATH = Path(__file__).with_name("db.ini")
+# поряд з exe (PyInstaller) або зі скриптом
+APP_DIR = Path(sys.executable if getattr(sys, "frozen", False) else __file__).resolve().parent
+DB_CONFIG_PATH = APP_DIR / "db.ini"
 
 
 def load_db_config() -> dict:
@@ -64,7 +66,7 @@ def load_db_config() -> dict:
 
 UPDATE_SQL = 'UPDATE "loaded_products"."model" SET "reason_id" = %s WHERE "art" = %s'
 
-LOG_PATH = Path(__file__).with_name("process_folders.log")
+LOG_PATH = APP_DIR / "process_folders.log"
 _log_file = None
 
 

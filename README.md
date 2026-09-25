@@ -11,7 +11,15 @@
 5. видаляє колонки, у заголовку яких є `_r`;
 6. пакує папку в `<назва папки>.zip` поряд з нею.
 
-## Вимоги
+## Швидкий старт без Python (готовий exe)
+
+1. Завантажити `yo-folder-processor-win64.zip` з [Releases](https://github.com/Saymoregeomancer/yo-folder-processor/releases/latest) і розпакувати в постійну папку.
+2. Покласти поряд `db.ini` з параметрами бази (зразок — `db.ini.example`; пароль у реліз не входить, його передають окремо).
+3. Запустити `install_context_menu.bat` — з'явиться пункт у меню правої кнопки миші.
+
+Потрібен тільки встановлений **Microsoft Excel**. Python не потрібен.
+
+## Вимоги (запуск з вихідного коду)
 
 - Windows + Microsoft Excel (працює через xlwings)
 - Python 3.9+ у `PATH`
@@ -54,6 +62,12 @@ copy db.ini.example db.ini
 У Windows 11 пункт знаходиться в «Показати додаткові параметри» (Shift+F10).
 Меню посилається на поточне розташування скриптів — якщо перенесли папку, запустіть
 `install_context_menu.bat` ще раз. Видалити меню: `uninstall_context_menu.bat`.
+
+## Збірка exe
+
+`build_exe.bat` створює чисте середовище `.venv-build`, збирає `process_folders.exe`
+(PyInstaller) і архів `release\yo-folder-processor-win64.zip`. Якщо `process_folders.exe`
+лежить поряд з `.bat`, запускається він, інакше — `python process_folders.py`.
 
 Без контекстного меню шлях можна передати аргументом:
 `process_folders.bat "C:\path\to\folder"`.
