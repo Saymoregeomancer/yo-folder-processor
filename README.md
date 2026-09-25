@@ -1,0 +1,38 @@
+# yo-folder-processor
+
+Обробка папок з ексель-файлами.
+
+Для кожної директорії, назва якої складається тільки з цифр:
+
+1. знаходить ексель файл (`.xlsx`, `.xlsm`, `.xls`);
+2. на аркуші **«Шаблон»** шукає рядки, де в колонці **B** стоїть число (`reason_id`);
+3. виконує `UPDATE loaded_products.model SET reason_id = B WHERE art = A`;
+4. після успішного commit видаляє ці рядки через Excel (формули, стилі й картинки зберігаються);
+5. видаляє колонки, у заголовку яких є `_r`;
+6. пакує папку в `<назва папки>.zip` поряд з нею.
+
+## Вимоги
+
+- Windows + Microsoft Excel (працює через xlwings)
+- Python 3.9+ у `PATH`
+
+## Встановлення
+
+```bat
+pip install -r requirements.txt
+copy db.ini.example db.ini
+```
+
+Заповніть `db.ini` параметрами бази. Файл у git не потрапляє. Будь-яке значення
+можна перевизначити змінною оточення `TER_DB_HOST`, `TER_DB_PORT`, `TER_DB_NAME`,
+`TER_DB_USER`, `TER_DB_PASSWORD`.
+
+## Запуск
+
+| Файл | Що робить |
+|---|---|
+| `process_folders.bat` | обробка (з підтвердженням) |
+| `process_folders_dry_run.bat` | перевірка — нічого не змінює |
+
+Параметри `process_folders.py`: `--root`, `--sheet`, `--dry-run`, `--yes`,
+`--overwrite-zip`, `--folders 2481 2502`, `--marker _r`, `--keep-cols`.

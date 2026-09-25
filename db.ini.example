@@ -1,0 +1,8 @@
+; Скопіюйте у db.ini і заповніть. db.ini не комітиться в git.
+; Кожне значення можна перевизначити змінною оточення TER_DB_<KEY> (напр. TER_DB_PASSWORD).
+[db]
+host = 127.0.0.1
+port = 5432
+dbname = actualDb
+user = loaded_products_reader
+password =

@@ -1,0 +1,18 @@
+# У цій папці лежать і інші скрипти — в репозиторій потрапляє тільки обробник папок.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/requirements.txt
+!/db.ini.example
+!/process_folders.py
+!/process_folders.bat
+!/process_folders_dry_run.bat
+!/install_context_menu.bat
+!/install_context_menu.ps1
+!/uninstall_context_menu.bat
+
+# локальні дані — ніколи не комітити
+db.ini
+*.log
+__pycache__/
