@@ -217,6 +217,9 @@ def zip_folder(folder: Path, overwrite: bool) -> Path:
 
 def main():
     parser = argparse.ArgumentParser(description="Обробка папок з ексель-файлами")
+    parser.add_argument("target", nargs="?",
+                        help="папка з контекстного меню: коренева директорія, "
+                             "або одна папка з числовою назвою")
     parser.add_argument("--root", default=ROOT_DIR, help="коренева директорія")
     parser.add_argument("--sheet", default=SHEET_NAME, help="назва аркуша з даними")
     parser.add_argument("--dry-run", action="store_true",
@@ -231,14 +234,19 @@ def main():
                         help="не видаляти колонки — обробляти тільки рядки")
     args = parser.parse_args()
 
-    root = Path(args.root)
+    root = Path(args.target or args.root).resolve()
     if not root.is_dir():
         log("[ПОМИЛКА] Директорія не знайдена: %s" % root)
         return 1
 
+    wanted = set(args.folders or [])
+    if args.target and root.name.isdigit():
+        # клік по самій папці з числовою назвою -> обробляємо тільки її
+        wanted = {root.name}
+        root = root.parent
+
     folders = digit_dirs(root)
-    if args.folders:
-        wanted = set(args.folders)
+    if wanted:
         folders = [f for f in folders if f.name in wanted]
 
     log("Корінь: %s" % root)
